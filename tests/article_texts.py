@@ -7,3 +7,6 @@ class ArticleTexts:
 
     def summarized_text_for(self, full_text):
         return full_text[:100]
+
+    def valid_title(self):
+        return 'A title'
