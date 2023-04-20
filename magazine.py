@@ -19,3 +19,9 @@ class Magazine:
 
     def _article_titles(self):
         return [article.title() for article in self._articles]
+
+    def article_with_title(self, article_title):
+        try:
+            return [article for article in self._articles if article.title() == article_title][0]
+        except IndexError as error:
+            raise Exception("There's no article with provided title")

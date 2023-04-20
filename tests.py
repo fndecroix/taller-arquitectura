@@ -75,6 +75,21 @@ class MagazineTest(TestCase):
         self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
                                      **{'a_title': article_title, 'a_text': article_text})
 
+    def test_can_access_an_article_by_its_title(self):
+        article_title = 'A title'
+        article_text = self._valid_text()
+        self._magazine.publish_article(a_title=article_title, a_text=article_text)
+
+        article = self._magazine.article_with_title(article_title)
+        self.assertEquals(article_text, article.text())
+
+    def test_cannot_get_an_article_with_a_nonexistent_title(self):
+        article_title = 'A title'
+
+        expected_error_message = "There's no article with provided title"
+        self.assertRaisesWithMessage(expected_error_message, self._magazine.article_with_title,
+                                     **{'article_title': article_title})
+
     # asserts
 
     def _assert_article_has_text(self, article_number, article_text):
