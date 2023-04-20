@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from magazine import Magazine
+from tests.article_texts import ArticleTexts
 
 
 class MagazineTest(TestCase):
@@ -75,6 +76,20 @@ class MagazineTest(TestCase):
         self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
                                      **{'a_title': article_title, 'a_text': article_text})
 
+    def test_cannot_access_an_article_by_a_nonexistent_id(self):
+        article_nonexistent_id = 1
+
+        expected_error_message = "Nonexistent ID"
+        self.assertRaisesWithMessage(expected_error_message, self._magazine.article_with_id,
+                                     **{'article_id': article_nonexistent_id})
+
+    def test_cannot_access_an_article_by_a_invalid_id(self):
+        article_invalid_id = -1
+
+        expected_error_message = "Invalid ID"
+        self.assertRaisesWithMessage(expected_error_message, self._magazine.article_with_id,
+                                     **{'article_id': article_invalid_id})
+
     # asserts
 
     def _assert_article_has_text(self, article_number, article_text):
@@ -92,8 +107,8 @@ class MagazineTest(TestCase):
 
     # aux
 
-    def _text_with_length(self, text_length):
-        return ''.join(['A' for i in range(0, text_length)])
-
     def _valid_text(self):
-        return self._text_with_length(2000)
+        return ArticleTexts().valid_text()
+
+    def _text_with_length(self, text_length):
+        return ArticleTexts().text_with_length(text_length)
