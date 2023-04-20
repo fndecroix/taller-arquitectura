@@ -1,39 +1,21 @@
+from article import Article
+
+
 class Magazine:
 
     def __init__(self) -> None:
         self._articles = []
 
     def publish_article(self, a_title, a_text):
+        self._validate_title(a_title)
         self._articles.append(Article(a_title, a_text))
 
     def published_articles(self):
         return self._articles
 
-
-class Article:
-    MAX_TITLE_LENGTH = 50
-    MIN_TITLE_LENGTH = 2
-    MAX_TEXT_LENGTH = 5200
-    MIN_TEXT_LENGTH = 1800
-
-    def __init__(self, a_title, a_text) -> None:
-        self._validate_title(a_title)
-        self._validate_text(a_text)
-        self._title = a_title
-        self._text = a_text
-
-    def title(self):
-        return self._title
-
-    def text(self):
-        return self._text
-
     def _validate_title(self, a_title):
-        title_has_a_valid_length = self.MIN_TITLE_LENGTH <= len(a_title) <= self.MAX_TITLE_LENGTH
-        if not title_has_a_valid_length:
-            raise Exception('The title must be 2 to 50 characters long')
+        if a_title in self._article_titles():
+            raise Exception('Cannot publish two articles with the same title')
 
-    def _validate_text(self, a_text):
-        text_has_a_valid_length = self.MIN_TEXT_LENGTH <= len(a_text) <= self.MAX_TEXT_LENGTH
-        if not text_has_a_valid_length:
-            raise Exception('The text must be 1800 to 5200 characters long')
+    def _article_titles(self):
+        return [article.title() for article in self._articles]

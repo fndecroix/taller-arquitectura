@@ -8,19 +8,19 @@ class MagazineTest(TestCase):
         self._magazine = Magazine()
 
     def test_can_add_an_article_to_a_magazine(self):
-        self._magazine.publish_article(a_title='A title', a_text=self._text_with_length(2000))
+        self._magazine.publish_article(a_title='A title', a_text=self._valid_text())
 
         self.assertEquals(1, len(self._magazine.published_articles()))
 
     def test_can_read_title_of_magazine_articles(self):
         article_title = 'A title'
-        self._magazine.publish_article(a_title=article_title, a_text=self._text_with_length(2000))
+        self._magazine.publish_article(a_title=article_title, a_text=self._valid_text())
 
         self._assert_article_has_title(0, article_title)
 
     def test_can_read_text_of_magazine_articles(self):
         article_title = 'A title'
-        article_text = self._text_with_length(2000)
+        article_text = self._valid_text()
         self._magazine.publish_article(a_title=article_title, a_text=article_text)
 
         article_number = 0
@@ -28,10 +28,10 @@ class MagazineTest(TestCase):
 
     def test_can_add_multiple_articles_to_a_magazine(self):
         article_title = 'A title'
-        article_text = self._text_with_length(2000)
+        article_text = self._valid_text()
         self._magazine.publish_article(a_title=article_title, a_text=article_text)
         other_article_title = 'other title'
-        other_article_text = self._text_with_length(2000)
+        other_article_text = self._valid_text()
 
         self._magazine.publish_article(a_title=other_article_title, a_text=other_article_text)
 
@@ -40,14 +40,14 @@ class MagazineTest(TestCase):
 
     def test_cannot_publish_an_article_with_a_short_title(self):
         article_title = 'A'
-        article_text = self._text_with_length(2000)
+        article_text = self._valid_text()
         expected_error_message = 'The title must be 2 to 50 characters long'
         self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
                                      **{'a_title': article_title, 'a_text': article_text})
 
     def test_cannot_publish_an_article_with_a_long_title(self):
         article_title = self._text_with_length(51)
-        article_text = self._text_with_length(2000)
+        article_text = self._valid_text()
         expected_error_message = 'The title must be 2 to 50 characters long'
         self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
                                      **{'a_title': article_title, 'a_text': article_text})
@@ -63,6 +63,15 @@ class MagazineTest(TestCase):
         article_title = 'A title'
         article_text = self._text_with_length(5201)
         expected_error_message = 'The text must be 1800 to 5200 characters long'
+        self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
+                                     **{'a_title': article_title, 'a_text': article_text})
+
+    def test_cannot_publish_two_articles_with_the_same_title(self):
+        article_title = 'A title'
+        article_text = self._valid_text()
+        self._magazine.publish_article(a_title=article_title, a_text=article_text)
+
+        expected_error_message = 'Cannot publish two articles with the same title'
         self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
                                      **{'a_title': article_title, 'a_text': article_text})
 
@@ -85,3 +94,6 @@ class MagazineTest(TestCase):
 
     def _text_with_length(self, text_length):
         return ''.join(['A' for i in range(0, text_length)])
+
+    def _valid_text(self):
+        return self._text_with_length(2000)
