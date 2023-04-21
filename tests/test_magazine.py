@@ -17,15 +17,14 @@ class MagazineTest(TestCase):
         article_title = self._valid_title()
         self._magazine.publish_article(a_title=article_title, a_text=self._valid_text())
 
-        self._assert_article_has_title(0, article_title)
+        self._assert_article_has_title(1, article_title)
 
     def test_can_read_text_of_magazine_articles(self):
         article_title = self._valid_title()
         article_text = self._valid_text()
         self._magazine.publish_article(a_title=article_title, a_text=article_text)
 
-        article_number = 0
-        self._assert_article_has_text(article_number, article_text)
+        self._assert_article_has_text(1, article_text)
 
     def test_can_add_multiple_articles_to_a_magazine(self):
         article_title = self._valid_title()
@@ -36,8 +35,8 @@ class MagazineTest(TestCase):
 
         self._magazine.publish_article(a_title=other_article_title, a_text=other_article_text)
 
-        self._assert_article_has_title(1, other_article_title)
-        self._assert_article_has_text(1, other_article_text)
+        self._assert_article_has_title(2, other_article_title)
+        self._assert_article_has_text(2, other_article_text)
 
     def test_cannot_publish_an_article_with_a_short_title(self):
         article_title = 'A'
@@ -82,12 +81,12 @@ class MagazineTest(TestCase):
                                      **{'article_number': article_invalid_id})
 
     def _assert_article_has_text(self, article_number, article_text):
-        self.assertEquals(article_text, self._magazine.published_articles()[article_number].text())
+        self.assertEquals(article_text, self._magazine.article_with_number(article_number).text())
 
     # asserts
 
     def _assert_article_has_title(self, article_number, article_title):
-        self.assertEquals(article_title, self._magazine.published_articles()[article_number].title())
+        self.assertEquals(article_title, self._magazine.article_with_number(article_number).title())
 
     def assertRaisesWithMessage(self, error_message, closure, *args, **kwargs):
         try:

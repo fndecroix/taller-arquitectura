@@ -3,7 +3,7 @@ class ArticleCollection:
         self._articles = []
 
     def all(self):
-        return self._articles
+        return {number + 1: article for (number, article) in enumerate(self._articles)}
 
     def with_number(self, number):
         self._validate_article_number(number)
