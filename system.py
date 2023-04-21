@@ -13,7 +13,7 @@ class PublishingSystem:
         return self._magazine.publish_article(a_title, a_text)
 
     def full_article(self, article_id):
-        article = self._magazine.article_with_id(article_id)
+        article = self._magazine.article_with_number(article_id)
         return self._serialize_full_article(article)
 
     def _serialize_summarized_article(self, article):
