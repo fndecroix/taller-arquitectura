@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from interfaces.http_interface import HttpInterface
+from interfaces.http_interface import HttpInterface, HttpRequest
 from system import PublishingSystem
 from tests.article_texts import ArticleTexts
 
@@ -36,7 +36,7 @@ class HttpInterfaceTest(TestCase):
         self.assertEquals(article_details['title'], a_title)
 
     def _http_request_with_path(self, path):
-        return {'path': path}
+        return HttpRequest(path=path)
 
     def add_an_article_with(self, a_title, a_text):
         return self.publishing_system.publish_article(a_title, a_text)

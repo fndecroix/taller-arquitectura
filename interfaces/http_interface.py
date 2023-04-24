@@ -6,7 +6,7 @@ class HttpInterface:
         self._publishing_system = publishing_system
 
     def get(self, request):
-        path = request['path']
+        path = request.path()
         if path == '/articles':
             articles = self._publishing_system.published_articles()
             return HttpResponse(content=articles)
@@ -23,3 +23,12 @@ class HttpResponse:
 
     def content(self):
         return self._content
+
+
+class HttpRequest:
+
+    def __init__(self, path) -> None:
+        self._path = path
+
+    def path(self):
+        return self._path
