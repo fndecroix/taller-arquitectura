@@ -4,10 +4,10 @@ class HttpInterface:
 
     def get(self, path):
         articles = self._publishing_system.published_articles()
-        return HttpRequest(content=articles)
+        return HttpResponse(content=articles)
 
 
-class HttpRequest:
+class HttpResponse:
 
     def __init__(self, content) -> None:
         self._content = content

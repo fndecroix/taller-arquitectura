@@ -17,8 +17,10 @@ class HttpInterfaceTest(TestCase):
         a_title = 'A title'
         self.add_an_article_with_title(a_title)
 
-        self.assertEquals(len(self.interface.get('/articles').content()), 1)
-        self.assertEquals(self.interface.get('/articles').content()[0]['title'], a_title)
+        article_list = self.interface.get('/articles').content()
+
+        self.assertEquals(len(article_list), 1)
+        self.assertEquals(article_list[0]['title'], a_title)
 
     def add_an_article_with_title(self, a_title):
         self.publishing_system.publish_article(a_title, ArticleTexts().valid_text())
