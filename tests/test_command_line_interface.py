@@ -21,7 +21,7 @@ class CommandLineInterfaceTest(TestCase):
              },
         ]
 
-        self.interface.process(operations[0])
+        self.interface.publish_article(operations[0])
 
         expected_regex = r'^Published article [0-9]+: .+$'
         output_message = self._get_message_from_output(self.output_stream)
