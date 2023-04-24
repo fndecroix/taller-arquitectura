@@ -5,15 +5,15 @@ class HttpInterface:
     def __init__(self, publishing_system):
         self._publishing_system = publishing_system
 
-    def get(self, request):
+    def get_article(self, request):
         path = request.path()
-        if path == '/articles':
-            articles = self._publishing_system.published_articles()
-            return HttpResponse(content=articles)
-        else:
-            matches = re.match(r'/article/(?P<article_id>\d+)$', path)
-            article_id = int(matches['article_id'][0])
-            return HttpResponse(content=self._publishing_system.full_article(article_id))
+        matches = re.match(r'/article/(?P<article_id>\d+)$', path)
+        article_id = int(matches['article_id'][0])
+        return HttpResponse(content=self._publishing_system.full_article(article_id))
+
+    def get_articles(self, request):
+        articles = self._publishing_system.published_articles()
+        return HttpResponse(content=articles)
 
 
 class HttpResponse:
