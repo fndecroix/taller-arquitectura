@@ -2,7 +2,7 @@ class HttpInterface:
     def __init__(self, publishing_system):
         self._publishing_system = publishing_system
 
-    def get(self, path):
+    def get(self, request):
         articles = self._publishing_system.published_articles()
         return HttpResponse(content=articles)
 
