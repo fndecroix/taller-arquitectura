@@ -23,10 +23,10 @@ class CommandLineInterfaceTest(TestCase):
 
         self.interface.process(operations[0])
 
-        expected_text = f'Published article: {operations[0]["title"]}'
+        expected_regex = r'^Published article [0-9]+: .+$'
         output_message = self._get_message_from_output(self.output_stream)
 
-        self.assertEquals(output_message, expected_text)
+        self.assertRegex(output_message, expected_regex)
         self.assertEquals(len(self.publishing_system.published_articles()), 1)
 
     def _interface_with_input(self, output_stream):

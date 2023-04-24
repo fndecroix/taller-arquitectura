@@ -4,5 +4,5 @@ class CommandLineInterface:
         self._output_stream = output_stream
 
     def process(self, operation):
-        self._publishing_system.publish_article(operation["title"], operation["text"])
-        self._output_stream.write(f'Published article: {operation["title"]}')
+        article_id = self._publishing_system.publish_article(operation["title"], operation["text"])
+        self._output_stream.write(f'Published article {article_id}: {operation["title"]}')
