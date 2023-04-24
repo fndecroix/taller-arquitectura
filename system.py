@@ -1,4 +1,4 @@
-from magazine import Magazine
+from domain.magazine import Magazine
 
 
 class PublishingSystem:

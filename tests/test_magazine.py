@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from magazine import Magazine
+from domain.magazine import Magazine
 from tests.article_texts import ArticleTexts
 
 

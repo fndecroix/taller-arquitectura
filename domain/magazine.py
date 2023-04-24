@@ -1,5 +1,5 @@
-from article import Article
-from article_collection import ArticleCollection
+from domain.article import Article
+from domain.article_collection import ArticleCollection
 
 
 class Magazine:
