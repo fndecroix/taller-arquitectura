@@ -6,10 +6,8 @@ class HttpInterface:
         self._publishing_system = publishing_system
 
     def get_article(self, request):
-        path = request.path()
-        matches = re.match(r'/article/(?P<article_id>\d+)$', path)
-        article_id = int(matches['article_id'][0])
-        return HttpResponse(content=self._publishing_system.full_article(article_id))
+        article_number = request.parameters()['article_number']
+        return HttpResponse(content=self._publishing_system.full_article(article_number))
 
     def get_articles(self, request):
         articles = self._publishing_system.published_articles()
@@ -17,7 +15,6 @@ class HttpInterface:
 
 
 class HttpResponse:
-
     def __init__(self, content) -> None:
         self._content = content
 
@@ -26,9 +23,8 @@ class HttpResponse:
 
 
 class HttpRequest:
+    def __init__(self, parameters) -> None:
+        self._parameters = parameters
 
-    def __init__(self, path) -> None:
-        self._path = path
-
-    def path(self):
-        return self._path
+    def parameters(self):
+        return self._parameters
