@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from publishing_system.publishing_system.views.publishing_system_views import PublishingSystemViews
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('articles/', PublishingSystemViews().get_articles, name='list-articles'),
 ]
