@@ -1,6 +1,5 @@
 from unittest import TestCase
 
-from interfaces.http_interface import HttpInterface
 from system import PublishingSystem
 from tests.article_texts import ArticleTexts
 from tests.http_client import HttpClient
@@ -8,8 +7,10 @@ from tests.http_client import HttpClient
 
 class HttpInterfaceTest(TestCase):
     def setUp(self) -> None:
+        self.http_client = HttpClient()
+
         self.publishing_system = PublishingSystem()
-        self.http_client = HttpClient(HttpInterface(publishing_system=self.publishing_system))
+        self.http_client.set_system(self.publishing_system)
 
     def test_article_list_when_there_are_no_articles_is_empty(self):
         self.assertEquals(len(self.http_client.get_articles()), 0)
