@@ -1,13 +1,15 @@
-from interfaces.http_interface import HttpInterface
+from interfaces.http_interface import HttpInterface, HttpRequest
 from publishing_system.publishing_system.django_http_response import DjangoHttpResponse
 from publishing_system.publishing_system.global_publishing_system import GlobalPublishingSystem
 
 
 class PublishingSystemViews:
     def get_articles(self, request):
-        # TODO: el request es el de django y deberia ser el nuestro
-        response = self.interface().get_articles(request)
+        response = self.interface().get_articles(self._build_request(request))
         return DjangoHttpResponse.response_for(response)
+
+    def _build_request(self, request):
+        return HttpRequest(parameters={})
 
     def interface(self):
         return HttpInterface(publishing_system=self.system())
