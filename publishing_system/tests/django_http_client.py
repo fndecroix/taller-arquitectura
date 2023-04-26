@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.test.client import Client
 from django.urls import reverse
 
@@ -7,6 +8,9 @@ from publishing_system.publishing_system.global_publishing_system import GlobalP
 
 
 class DjangoHttpClient:
+    def __init__(self):
+        settings.configure(ROOT_URLCONF=UrlConf())
+
     def set_system(self, new_system):
         GlobalPublishingSystem.set_system(new_system)
 
@@ -17,3 +21,19 @@ class DjangoHttpClient:
 
     def django_client(self):
         return Client()
+
+
+class UrlConf:
+    @property
+    def urlpatterns(self):
+        from django.contrib import admin
+        from django.urls import path
+
+        from publishing_system.publishing_system.views.publishing_system_views import PublishingSystemViews
+
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('articles/', PublishingSystemViews().get_articles, name='list-articles'),
+        ]
+
+        return urlpatterns
