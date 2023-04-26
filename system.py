@@ -27,3 +27,6 @@ class PublishingSystem:
             'text': article.text(),
             'title': article.title()
         }
+
+    def set_magazine(self, magazine):
+        self._magazine = magazine

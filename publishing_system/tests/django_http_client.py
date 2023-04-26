@@ -12,6 +12,7 @@ class DjangoHttpClient:
 
     def get_articles(self):
         django_response = self.django_client().get(reverse('list-articles'))
+        # TODO: este metodo deberia responder nuestra Response
         return json.loads(django_response.content)
 
     def django_client(self):
