@@ -1,6 +1,5 @@
 from django.test import TestCase
 
-from interfaces.http_interface import HttpInterface
 from publishing_system.publishing_system.global_publishing_system import GlobalPublishingSystem
 from publishing_system.tests.django_http_client import DjangoHttpClient
 from system import PublishingSystem
