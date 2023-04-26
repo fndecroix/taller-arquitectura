@@ -1,4 +1,4 @@
-from django.test import TestCase
+from unittest import TestCase
 
 from publishing_system.tests.django_http_client import DjangoHttpClient
 from system import PublishingSystem

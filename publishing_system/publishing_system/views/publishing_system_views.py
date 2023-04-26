@@ -5,8 +5,10 @@ from publishing_system.publishing_system.global_publishing_system import GlobalP
 
 class PublishingSystemViews:
     def get_articles(self, request):
-        response = self.interface().get_articles(self._build_request(request))
-        return DjangoHttpResponse.response_for(response)
+        http_request = self._build_request(request)
+        http_response = self.interface().get_articles(http_request)
+
+        return DjangoHttpResponse.response_for(http_response)
 
     def _build_request(self, request):
         return HttpRequest(parameters={})

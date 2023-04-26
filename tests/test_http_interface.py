@@ -8,7 +8,6 @@ from tests.publishing_system_props import PublishingSystemProps
 class HttpInterfaceTest(TestCase):
     def setUp(self) -> None:
         self.http_client = HttpClient()
-
         self.http_client.set_system(PublishingSystem())
 
     def test_article_list_when_there_are_no_articles_is_empty(self):
