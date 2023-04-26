@@ -1,5 +1,7 @@
+import os
 from unittest import TestCase
 
+from publishing_system.tests.django_http_client import DjangoHttpClient
 from system import PublishingSystem
 from tests.http_client import HttpClient
 from tests.publishing_system_props import PublishingSystemProps
@@ -7,7 +9,14 @@ from tests.publishing_system_props import PublishingSystemProps
 
 class HttpInterfaceTest(TestCase):
     def setUp(self) -> None:
-        self.http_client = HttpClient()
+        test_technology = os.environ['TEST_TECHNOLOGY']
+        if test_technology == 'PERFECT':
+            self.http_client = HttpClient()
+        elif test_technology == 'DJANGO':
+            self.http_client = DjangoHttpClient()
+        else:
+            raise Exception(f'Invalid test technology: {test_technology}')
+
         self.http_client.set_system(PublishingSystem())
 
     def test_article_list_when_there_are_no_articles_is_empty(self):
