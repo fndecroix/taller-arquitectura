@@ -28,8 +28,17 @@ class DjangoHttpClient:
 
         from django.conf import settings
         if not settings.configured:
+            from pathlib import Path
+
+            BASE_DIR = Path(__file__).resolve().parent.parent
             settings.configure(ROOT_URLCONF=UrlConf(new_system),
-                               INSTALLED_APPS=['publishing_system']
+                               INSTALLED_APPS=['publishing_system'],
+                               DATABASES={
+                                   'default': {
+                                       'ENGINE': 'django.db.backends.sqlite3',
+                                       'NAME': BASE_DIR / 'db.sqlite3',
+                                   }
+                               }
                                )
             django.setup()
 
