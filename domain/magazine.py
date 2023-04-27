@@ -8,7 +8,15 @@ class Magazine:
         self._articles = ArticleCollection()
 
     def publish_article(self, a_title, a_text):
-        return self._articles.add(Article(a_title, a_text))
+        article = Article(a_title, a_text)
+        import os
+        if os.environ.get('TEST_TECHNOLOGY') == 'PERFECT':
+            return self._articles.add(article)
+        if os.environ.get('TEST_TECHNOLOGY') == 'DJANGO':
+            from publishing_system.publishing_system.models import PersistentArticle
+
+            return PersistentArticle.new_from(article)
+        raise ValueError('Unknown Technology')
 
     def published_articles(self):
         return self._articles.all()
