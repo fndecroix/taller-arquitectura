@@ -6,11 +6,11 @@ class HttpClient:
         self.publishing_system = None
 
     def get_articles(self):
-        return self.interface().get_articles(self._http_request_with(parameters={})).content()
+        return self.interface().get_articles(self._http_request_with(parameters={}))
 
     def get_article(self, article_number):
         parameters = {'article_number': article_number}
-        return self.interface().get_article(self._http_request_with(parameters=parameters)).content()
+        return self.interface().get_article(self._http_request_with(parameters=parameters))
 
     def set_system(self, new_system):
         self.publishing_system = new_system
