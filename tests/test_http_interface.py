@@ -13,7 +13,20 @@ class HttpInterfaceTest(TestCase):
         if test_technology == 'PERFECT':
             self.http_client = HttpClient()
         elif test_technology == 'DJANGO':
+            from django_framework.django_settings import MyDjango
             self.http_client = DjangoHttpClient()
+            MyDjango().configure_settings_with(system=None, debug=True)
+            self.old_database_config = MyDjango().initialize_django_db()
+        else:
+            raise Exception(f'Invalid test technology: {test_technology}')
+
+    def tearDown(self) -> None:
+        test_technology = os.environ['TEST_TECHNOLOGY']
+        if test_technology == 'PERFECT':
+            pass
+        elif test_technology == 'DJANGO':
+            from django_framework.django_settings import MyDjango
+            MyDjango().destroy_django_db(old_config=self.old_database_config)
         else:
             raise Exception(f'Invalid test technology: {test_technology}')
 

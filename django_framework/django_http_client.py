@@ -1,6 +1,6 @@
 import json
 
-from django_framework.django_settings import DjangoSettings
+from django_framework.django_settings import MyDjango
 from interfaces.http_interface import HttpResponse
 
 
@@ -24,7 +24,7 @@ class DjangoHttpClient:
         return Client()
 
     def _inject_system_in_django_views(self, new_system):
-        DjangoSettings().configure_settings_with(system=new_system, debug=True)
+        MyDjango().configure_settings_with(system=new_system, debug=True)
 
 
 class UrlConf:
