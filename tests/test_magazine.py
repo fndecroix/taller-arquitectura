@@ -8,7 +8,7 @@ class MagazineTest(TestCase):
     def setUp(self) -> None:
         self._magazine = Magazine()
 
-    def test_can_add_an_article_to_a_magazine(self):
+    def test_can_publish_an_article_to_a_magazine(self):
         self._magazine.publish_article(a_title=self._valid_title(), a_text=self._valid_text())
 
         self.assertEquals(1, len(self._magazine.published_articles()))
@@ -26,7 +26,7 @@ class MagazineTest(TestCase):
 
         self._assert_article_has_text(1, article_text)
 
-    def test_can_add_multiple_articles_to_a_magazine(self):
+    def test_can_publish_multiple_articles_to_a_magazine(self):
         article_title = self._valid_title()
         article_text = self._valid_text()
         self._magazine.publish_article(a_title=article_title, a_text=article_text)
