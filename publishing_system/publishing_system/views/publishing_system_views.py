@@ -1,9 +1,11 @@
 from interfaces.http_interface import HttpInterface, HttpRequest
 from publishing_system.publishing_system.django_http_response import DjangoHttpResponse
-from publishing_system.publishing_system.global_publishing_system import GlobalPublishingSystem
 
 
 class PublishingSystemViews:
+    def __init__(self, system) -> None:
+        self.system = system
+
     def get_articles(self, request):
         http_request = self._build_request(request)
         http_response = self.interface().get_articles(http_request)
@@ -14,7 +16,4 @@ class PublishingSystemViews:
         return HttpRequest(parameters={})
 
     def interface(self):
-        return HttpInterface(publishing_system=self.system())
-
-    def system(self):
-        return GlobalPublishingSystem.get_system()
+        return HttpInterface(publishing_system=self.system)
