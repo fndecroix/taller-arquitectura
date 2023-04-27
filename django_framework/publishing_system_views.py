@@ -1,5 +1,5 @@
 from interfaces.http_interface import HttpInterface, HttpRequest
-from publishing_system.publishing_system.django_http_response import DjangoHttpResponse
+from django_framework.django_http_response import DjangoHttpResponse
 
 
 class PublishingSystemViews:

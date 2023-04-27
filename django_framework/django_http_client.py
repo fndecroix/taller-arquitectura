@@ -40,7 +40,7 @@ class UrlConf:
     def urlpatterns(self):
         from django.urls import path
 
-        from publishing_system.publishing_system.views.publishing_system_views import PublishingSystemViews
+        from django_framework.publishing_system_views import PublishingSystemViews
 
         urlpatterns = [
             path('articles/', PublishingSystemViews(self.system).get_articles, name='list-articles'),

@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from publishing_system.tests.django_http_client import DjangoHttpClient
+from django_framework.django_http_client import DjangoHttpClient
 from system import PublishingSystem
 from tests.http_client import HttpClient
 from tests.publishing_system_props import PublishingSystemProps
