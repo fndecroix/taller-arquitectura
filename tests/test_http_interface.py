@@ -28,5 +28,3 @@ class HttpInterfaceTest(TestCase):
         article_list = self.http_client.get_articles().content()
 
         self.assertEquals(len(article_list), 1)
-        # article_number_list = [article['article_number'] for article in system.published_articles()]
-        # self.assertIn(article_list[0]['number'], article_number_list)

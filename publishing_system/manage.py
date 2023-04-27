@@ -2,15 +2,14 @@
 """Django's command-line utility for administrative tasks."""
 import sys
 
+from django_framework.django_settings import DjangoSettings
+
 
 def main():
     """Run administrative tasks."""
-    from django.conf import settings
     from system import PublishingSystem
-    from django_framework.django_http_client import UrlConf
 
-    secret_key = 'django-insecure-^3#otl^ose7xu_t8wyt5*vxlcdp%cse6oobxz94&j19p0&tc!h'
-    settings.configure(ROOT_URLCONF=UrlConf(PublishingSystem()), DEBUG=True, SECRET_KEY=secret_key)
+    DjangoSettings.configure_settings_with(system=PublishingSystem(), debug=True)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
