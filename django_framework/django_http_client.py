@@ -28,9 +28,7 @@ class DjangoHttpClient:
 
         from django.conf import settings
         if not settings.configured:
-            settings.configure(ROOT_URLCONF=UrlConf(new_system),
-                               INSTALLED_APPS=['publishing_system']
-                               )
+            settings.configure(ROOT_URLCONF=UrlConf(new_system))
             django.setup()
 
         from django.test.utils import override_settings
