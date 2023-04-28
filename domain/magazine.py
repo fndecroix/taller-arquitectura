@@ -9,14 +9,7 @@ class Magazine:
 
     def publish_article(self, a_title, a_text):
         article = Article(a_title, a_text)
-        import os
-        if os.environ.get('TESTING_TECHNOLOGY') == 'PERFECT':
-            return self._articles.add(article)
-        if os.environ.get('TESTING_TECHNOLOGY') == 'DJANGO':
-            from publishing_system.models import PersistentArticle
-
-            return PersistentArticle.new_from(article)
-        raise ValueError('Unknown Technology')
+        return self._articles.add(article)
 
     def published_articles(self):
         return self._articles.all()

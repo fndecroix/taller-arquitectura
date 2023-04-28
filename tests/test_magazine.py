@@ -1,5 +1,4 @@
 from unittest import TestCase
-# from django.test import TestCase
 
 from django_framework.xxx import Xxx
 from domain.magazine import Magazine
@@ -17,7 +16,6 @@ class MagazineTest(TestCase):
 
 
     def tearDown(self) -> None:
-        return
         use_perfect_technology = self._should_use_perfect_technology()
         if not use_perfect_technology:
             self._django_configurator.destroy_django_db()
@@ -53,14 +51,14 @@ class MagazineTest(TestCase):
     def test_can_publish_multiple_articles_to_a_magazine(self):
         article_title = self._valid_title()
         article_text = self._valid_text()
-        self._magazine.publish_article(a_title=article_title, a_text=article_text)
+        article_number = self._magazine.publish_article(a_title=article_title, a_text=article_text)
         other_article_title = 'other title'
         other_article_text = self._valid_text()
 
-        self._magazine.publish_article(a_title=other_article_title, a_text=other_article_text)
+        other_article_number = self._magazine.publish_article(a_title=other_article_title, a_text=other_article_text)
 
-        self._assert_article_has_title(2, other_article_title)
-        self._assert_article_has_text(2, other_article_text)
+        self._assert_article_has_title(other_article_number, other_article_title)
+        self._assert_article_has_text(other_article_number, other_article_text)
 
     def test_cannot_publish_an_article_with_a_short_title(self):
         article_title = 'A'
@@ -97,7 +95,7 @@ class MagazineTest(TestCase):
         self.assertRaisesWithMessage(expected_error_message, self._magazine.article_with_number,
                                      **{'article_number': article_nonexistent_id})
 
-    def test_cannot_access_an_article_by_a_invalid_id(self):
+    def test_cannot_access_an_article_by_an_invalid_id(self):
         article_invalid_id = -1
 
         expected_error_message = "Invalid ID"

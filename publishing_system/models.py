@@ -11,3 +11,5 @@ class PersistentArticle(models.Model):
     def new_from(cls, article):
         persistent_article = cls(title=article.title(), text=article.text())
         persistent_article.save()
+
+        return persistent_article
