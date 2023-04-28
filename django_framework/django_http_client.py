@@ -1,6 +1,5 @@
 import json
 
-
 from interfaces.http_interface import HttpResponse
 
 
@@ -24,13 +23,6 @@ class DjangoHttpClient:
         return Client()
 
     def _inject_system_in_django_views(self, new_system):
-        import django
-
-        from django.conf import settings
-        if not settings.configured:
-            settings.configure(ROOT_URLCONF=UrlConf(new_system))
-            django.setup()
-
         from django.test.utils import override_settings
         settings_manager = override_settings(ROOT_URLCONF=UrlConf(new_system))
         settings_manager.enable()

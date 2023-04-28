@@ -2,14 +2,16 @@ import os
 from unittest import TestCase
 
 from django_framework.django_http_client import DjangoHttpClient
+from django_test_case import DjangoTestCase
 from system import PublishingSystem
 from tests.http_client import HttpClient
 from tests.publishing_system_props import PublishingSystemProps
 
 
-class HttpInterfaceTest(TestCase):
+class HttpInterfaceTest(DjangoTestCase):
     def setUp(self) -> None:
-        test_technology = os.environ['TEST_TECHNOLOGY']
+        super().setUp()
+        test_technology = os.environ['TESTING_TECHNOLOGY']
         if test_technology == 'PERFECT':
             self.http_client = HttpClient()
         elif test_technology == 'DJANGO':
