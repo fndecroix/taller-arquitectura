@@ -1,12 +1,36 @@
 from unittest import TestCase
+# from django.test import TestCase
 
+from django_framework.xxx import Xxx
 from domain.magazine import Magazine
 from tests.article_texts import ArticleTexts
 
 
 class MagazineTest(TestCase):
     def setUp(self) -> None:
+        use_perfect_technology = self._should_use_perfect_technology()
+        if not use_perfect_technology:
+            self._django_configurator = Xxx()
+            self._django_configurator.initialize_django_from_test()
+            self._django_configurator.initialize_django_db()
         self._magazine = Magazine()
+
+
+    def tearDown(self) -> None:
+        return
+        use_perfect_technology = self._should_use_perfect_technology()
+        if not use_perfect_technology:
+            self._django_configurator.destroy_django_db()
+
+    def _should_use_perfect_technology(self):
+        import os
+        testing_technology_var_name = 'TESTING_TECHNOLOGY'
+        technology = os.getenv(testing_technology_var_name)
+        if technology == 'PERFECT':
+            return True
+        if technology == 'DJANGO':
+            return False
+        raise ValueError(f'Unknown value for {testing_technology_var_name}: {technology}')
 
     def test_can_publish_an_article_to_a_magazine(self):
         self._magazine.publish_article(a_title=self._valid_title(), a_text=self._valid_text())
