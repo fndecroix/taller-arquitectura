@@ -1,9 +1,9 @@
-from django_test_case import DjangoTestCase
+from technology_test_case import TechnologyTestCase
 from system import PublishingSystem
 from tests.article_texts import ArticleTexts
 
 
-class SystemTests(DjangoTestCase):
+class SystemTests(TechnologyTestCase):
     def test_can_ask_system_for_list_of_articles(self):
         system = PublishingSystem()
 

@@ -1,9 +1,9 @@
-from django_test_case import DjangoTestCase
+from technology_test_case import TechnologyTestCase
 from domain.magazine import Magazine
 from tests.article_texts import ArticleTexts
 
 
-class MagazineTest(DjangoTestCase):
+class MagazineTest(TechnologyTestCase):
     def setUp(self) -> None:
         super().setUp()
         self._magazine = Magazine()

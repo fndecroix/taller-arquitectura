@@ -3,7 +3,7 @@ from unittest import TestCase
 from django_framework.xxx import Xxx
 
 
-class DjangoTestCase(TestCase):
+class TechnologyTestCase(TestCase):
     def setUp(self) -> None:
         use_perfect_technology = self._should_use_perfect_technology()
         if not use_perfect_technology:

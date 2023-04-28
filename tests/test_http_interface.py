@@ -1,14 +1,13 @@
 import os
-from unittest import TestCase
 
 from django_framework.django_http_client import DjangoHttpClient
-from django_test_case import DjangoTestCase
+from technology_test_case import TechnologyTestCase
 from system import PublishingSystem
 from tests.http_client import HttpClient
 from tests.publishing_system_props import PublishingSystemProps
 
 
-class HttpInterfaceTest(DjangoTestCase):
+class HttpInterfaceTest(TechnologyTestCase):
     def setUp(self) -> None:
         super().setUp()
         test_technology = os.environ['TESTING_TECHNOLOGY']
