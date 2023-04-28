@@ -27,6 +27,3 @@ class Magazine:
 
     def article_with_number(self, article_number):
         return self._articles.with_number(article_number)
-
-    def _article_titles(self):
-        return [article.title() for article in self._articles.all()]
