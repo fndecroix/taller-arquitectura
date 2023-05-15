@@ -1,5 +1,6 @@
 import json
 
+from django_framework.url_conf import UrlConf
 from interfaces.http_interface import HttpResponse
 
 
@@ -26,20 +27,3 @@ class DjangoHttpClient:
         from django.test.utils import override_settings
         settings_manager = override_settings(ROOT_URLCONF=UrlConf(new_system))
         settings_manager.enable()
-
-
-class UrlConf:
-    def __init__(self, system) -> None:
-        self.system = system
-
-    @property
-    def urlpatterns(self):
-        from django.urls import path
-
-        from django_framework.publishing_system_views import PublishingSystemViews
-
-        urlpatterns = [
-            path('articles/', PublishingSystemViews(self.system).get_articles, name='list-articles'),
-        ]
-
-        return urlpatterns

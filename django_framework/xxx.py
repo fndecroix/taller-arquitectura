@@ -21,7 +21,7 @@ class Xxx:
         django.setup()
 
         from django.test.utils import override_settings
-        from django_framework.django_http_client import UrlConf
+        from django_framework.url_conf import UrlConf
         settings_manager = override_settings(
             ROOT_URLCONF=UrlConf(assistant),
         )
@@ -42,7 +42,7 @@ class Xxx:
                 }
             )
         from django.test.utils import override_settings
-        from django_framework.django_http_client import UrlConf
+        from django_framework.url_conf import UrlConf
         settings_manager = override_settings(ROOT_URLCONF=UrlConf(assistant))
         settings_manager.enable()
         # Seems we don't need this because we don't use DB, nor DjangoAdmin
