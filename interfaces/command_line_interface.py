@@ -5,4 +5,4 @@ class CommandLineInterface:
 
     def publish_article(self, operation):
         article_id = self._publishing_system.publish_article(operation["title"], operation["text"])
-        self._output_stream.write(f'Published article {article_id}: {operation["title"]}')
+        self._output_stream.write(f'Published article {article_id}: {operation["title"]}\n')

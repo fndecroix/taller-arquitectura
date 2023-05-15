@@ -3,11 +3,13 @@ from unittest import TestCase
 
 from interfaces.command_line_interface import CommandLineInterface
 from system import PublishingSystem
+from technology_test_case import TechnologyTestCase
 from tests.article_texts import ArticleTexts
 
 
-class CommandLineInterfaceTest(TestCase):
+class CommandLineInterfaceTest(TechnologyTestCase):
     def setUp(self):
+        super().setUp()
         self.output_stream = io.StringIO()
         self.publishing_system = PublishingSystem()
         self.interface = self._interface_with_input(self.output_stream)
