@@ -18,7 +18,7 @@ class TransientArticleCollection(ArticleCollection):
         return len(self._articles)
 
     def _article_exists(self, number):
-        return number > self._number_of_articles()
+        return number <= self._number_of_articles()
 
     def _number_of_articles(self):
         return len(self._articles)

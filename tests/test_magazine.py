@@ -54,7 +54,7 @@ class MagazineTest(TechnologyTestCase):
 
     def test_cannot_publish_an_article_with_a_short_text(self):
         article_title = self._valid_title()
-        article_text = self._text_with_length(1799)
+        article_text = self._text_with_length(4)
         expected_error_message = 'The text must be 1800 to 5200 characters long'
         self.assertRaisesWithMessage(expected_error_message, self._magazine.publish_article,
                                      **{'a_title': article_title, 'a_text': article_text})

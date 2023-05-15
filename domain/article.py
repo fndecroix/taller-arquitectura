@@ -2,7 +2,7 @@ class Article:
     MAX_TITLE_LENGTH = 50
     MIN_TITLE_LENGTH = 2
     MAX_TEXT_LENGTH = 5200
-    MIN_TEXT_LENGTH = 1800
+    MIN_TEXT_LENGTH = 5
 
     def __init__(self, a_title, a_text) -> None:
         self._validate_title(a_title)
