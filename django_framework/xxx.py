@@ -40,8 +40,6 @@ class Xxx:
         self._db_config = discovery.setup_databases()
         discovery.teardown_databases(self._db_config)
         self._db_config = discovery.setup_databases()
-        # from code_repo.django.reader.models import MagazineArticle
-        # MagazineArticle.objects.all().delete()
 
     def destroy_django_db(self):
         from django.test.runner import DiscoverRunner
